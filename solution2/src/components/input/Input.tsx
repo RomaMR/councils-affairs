@@ -1,5 +1,6 @@
 import React, { useCallback, ChangeEvent } from 'react';
 import { FormikProps } from 'formik';
+import {TextField} from "@material-ui/core";
 
 interface InputsProps {
   form: FormikProps<any>;
@@ -17,15 +18,14 @@ function Input({ form, name, label, type = 'text', className, disabled }: Inputs
   }, [form, name]);
 
   return (
-    <div className={className}>
-      <strong>{label}</strong>
-      <input
-        type={type}
-        onChange={onChange}
-        value={form.values[name]}
-        disabled={disabled}
-      />
-    </div>
+    <TextField
+      className={className}
+      label={label}
+      type={type}
+      onChange={onChange}
+      value={form.values[name]}
+      disabled={disabled}
+    />
   );
 }
 

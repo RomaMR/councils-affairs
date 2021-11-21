@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Councillors } from "../../types";
+import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import { SendOutlined } from "@material-ui/icons";
+import {Councillors, Councils} from "../../types";
 import Page from "../../components/page/Page";
 import useCouncillorsContext from "../../hooks/useCouncillorsContext/useCouncillorsContext";
 import { CouncillorsFields, SortingFields } from "../../constants/fields";
@@ -66,19 +68,32 @@ function CouncillorsPage() {
       ]}
       actions={(
         <Link to={ROUTES.councils}>
-          <h3>Councils</h3>
+          <Button color='primary' size='large' endIcon={(<SendOutlined />)}>
+            Councils
+          </Button>
         </Link>
       )}
     >
-      <div className={styles.list}>
-        {councillors.map((council: Councillors) => (
-          <div key={council.id} className={styles.listItem}>
-            <div>{council.id}</div>
-            <div>{council.firstName}</div>
-            <div>{council.lastName}</div>
-          </div>
-        ))}
-      </div>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>id</TableCell>
+              <TableCell>firstName</TableCell>
+              <TableCell>lastName</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {councillors.map((council: Councillors) => (
+              <TableRow key={council.id}>
+                <TableCell>{council.id}</TableCell>
+                <TableCell>{council.firstName}</TableCell>
+                <TableCell>{council.lastName}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Page>
   );
 }

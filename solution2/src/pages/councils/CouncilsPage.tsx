@@ -7,6 +7,8 @@ import Form from "../../components/form/Form";
 import styles from './CouncilsPage.module.scss';
 import {Link} from "react-router-dom";
 import ROUTES from "../../constants/routes";
+import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {SendOutlined} from "@material-ui/icons";
 
 function CouncilsPage() {
   const {
@@ -74,21 +76,36 @@ function CouncilsPage() {
       ]}
       actions={(
         <Link to={ROUTES.councillors}>
-          <h3>Councillors</h3>
+          <Button color='primary' size='large' endIcon={(<SendOutlined />)}>
+            Councillors
+          </Button>
         </Link>
       )}
     >
-      <div className={styles.list}>
-        {councils.map((council: Councils) => (
-          <div key={council.id} className={styles.listItem}>
-            <div>{council.id}</div>
-            <div>{council.abbreviation}</div>
-            <div>{council.code}</div>
-            <div>{council.name}</div>
-            <div>{council.type}</div>
-          </div>
-        ))}
-      </div>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>id</TableCell>
+              <TableCell>abbreviation</TableCell>
+              <TableCell>code</TableCell>
+              <TableCell>name</TableCell>
+              <TableCell>type</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {councils.map((council: Councils) => (
+              <TableRow key={council.id}>
+                <TableCell>{council.id}</TableCell>
+                <TableCell>{council.abbreviation}</TableCell>
+                <TableCell>{council.code}</TableCell>
+                <TableCell>{council.name}</TableCell>
+                <TableCell>{council.type}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Page>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, FormikProps } from 'formik';
+import {Button} from "@material-ui/core";
 import Input from "../input/Input";
 import styles from "./Form.module.scss";
 
@@ -30,12 +31,14 @@ function Form({ header, fields, values, onSubmit }: FormProps) {
               name={item.field}
             />
           ))}
-          <button
-            className={styles.formApply}
+          <Button
             onClick={form.submitForm}
+            color='primary'
+            size='large'
+            type='submit'
           >
             Apply
-          </button>
+          </Button>
         </fieldset>
       )}
     </Formik>

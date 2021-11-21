@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './Page.module.scss';
+import {Paper} from "@material-ui/core";
 
 interface PageProps {
   title: string;
@@ -22,9 +23,9 @@ function Page({ title, children, aside, actions, isPageHeight }: PageProps) {
           {actions}
         </div>
       </header>
-      <aside className={styles.pageAside}>
+      <Paper className={styles.pageAside} elevation={12}>
         {aside}
-      </aside>
+      </Paper>
       <section className={clsx(styles.pageContent, { [styles.pageContentPageHeight]: isPageHeight })}>
         {children}
       </section>

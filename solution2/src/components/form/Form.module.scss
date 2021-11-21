@@ -1,4 +1,12 @@
 .form {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+
+  >* {
+    width: 100%;
+    margin: 10px 0;
+  }
 
   &Apply {
     display: block;
