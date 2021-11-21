@@ -5,11 +5,12 @@ import styles from './Page.module.scss';
 interface PageProps {
   title: string;
   children: JSX.Element;
+  aside?: JSX.Element | JSX.Element[];
   actions?: JSX.Element | JSX.Element[];
   isPageHeight?: boolean;
 }
 
-function Page({ title, children, actions, isPageHeight }: PageProps) {
+function Page({ title, children, aside, actions, isPageHeight }: PageProps) {
 
   return (
     <div className={styles.page}>
@@ -21,6 +22,9 @@ function Page({ title, children, actions, isPageHeight }: PageProps) {
           {actions}
         </div>
       </header>
+      <aside className={styles.pageAside}>
+        {aside}
+      </aside>
       <section className={clsx(styles.pageContent, { [styles.pageContentPageHeight]: isPageHeight })}>
         {children}
       </section>

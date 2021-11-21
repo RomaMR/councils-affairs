@@ -24,17 +24,19 @@ export default function CouncilsProvider({ children }: CouncilsProviderProps) {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get("/councillors?format=json");
+      const response = await axios.get("/councils?format=json");
       setUnprocessedCouncils(response.data);
     })();
   }, []);
 
   const filteredCouncils: Councils[] = useMemo(() => {
-    return (filters && (filters.id || filters.firstName || filters.lastName)) ? (
-      unprocessedCouncils.filter(({ id, firstName, lastName }) => (
+    return (filters && (filters.id || filters.abbreviation || filters.code || filters.name || filters.type)) ? (
+      unprocessedCouncils.filter(({ id, abbreviation, code, name, type }) => (
         (filters.id && `${id}`.indexOf(`${filters.id}`) >= 0) ||
-        (filters.firstName && firstName.indexOf(filters.firstName) >= 0) ||
-        (filters.lastName && lastName.indexOf(filters.lastName)) >= 0
+        (filters.abbreviation && abbreviation.indexOf(filters.abbreviation) >= 0) ||
+        (filters.code && code.indexOf(filters.code)) >= 0 ||
+        (filters.name && code.indexOf(filters.name)) >= 0 ||
+        (filters.type && code.indexOf(filters.type)) >= 0
       ))
     ) : unprocessedCouncils
   }, [unprocessedCouncils, filters]);
